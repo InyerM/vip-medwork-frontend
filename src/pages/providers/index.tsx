@@ -1,25 +1,45 @@
+// Core
+import Head from "next/head";
+
+// UI
 import Button from "@/components/Button";
 
-const links = [
-  { href: "/patients", label: "Patients" },
-  { href: "/providers", label: "Providers" },
-  { href: "/statuses", label: "Statuses" },
-];
+// Hooks
+import { useProviders } from "@/hooks/useProviders";
 
-export default function Providers() {
+export default function ProvidersPage() {
+  const { data, isLoading, error } = useProviders();
+
   return (
-    <section className="flex flex-col items-center justify-center h-[calc(100vh-6rem)]">
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-7xl font-bold mb-4">Providers</h1>
-        <p className="text-2xl">This is the internal system for managing patients, providers, and statuses.</p>
-      </div>
-      <div className="flex gap-4 my-10">
-        {links.map((link) => (
-          <Button key={link.href} as="link" href={link.href}>
-            {link.label}
+    <>
+      <Head>
+        <title>Providers | VIP Medwork</title>
+      </Head>
+
+      <main className="p-6 max-w-4xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold">Providers</h1>
+          <Button as="link" href="/providers/new">
+            Add Provider
           </Button>
-        ))}
-      </div>
-    </section>
+        </div>
+
+        {isLoading && <p>Loading providers...</p>}
+        {error && <p className="text-red-500">Error loading providers</p>}
+
+        <ul className="space-y-4">
+          {data?.map((provider) => (
+            <li
+              key={provider.id}
+              className="p-4 border rounded-xl bg-gray-900/10 border-gray-800"
+            >
+              <p className="font-semibold">{provider.fullName}</p>
+              <p className="text-sm text-gray-400">{provider.specialty}</p>
+              <p className="text-sm text-gray-400">{new Date(provider.createdAt).toLocaleString()}</p>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </>
   );
 }
