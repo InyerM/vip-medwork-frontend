@@ -34,6 +34,7 @@ export default function AssignProviderModal({ patientId, onClose, isOpen }: Assi
     mutationFn: (providerId: string) => assignProviderToPatient(patientId!, providerId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['patients'] });
+      queryClient.invalidateQueries({ queryKey: ['patient', patientId] });
       onClose();
     },
   });
