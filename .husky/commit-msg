@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ -n "$WSL_DISTRO_NAME" ] || [ "$(uname)" = "Linux" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
+
+npx --no-install commitlint --edit $1
