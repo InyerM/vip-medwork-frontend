@@ -27,7 +27,7 @@ export default function StatusDropdown({ selected, options, onChange }: Props) {
             </span>
           </ListboxButton>
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-            <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
               {options.map((status) => (
                 <ListboxOption key={status.id} value={status} className={({ active }) =>
                   `relative cursor-default select-none py-2 pl-10 pr-4 ${
