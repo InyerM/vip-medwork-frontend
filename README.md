@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VIP Medwork - Frontend
 
-## Getting Started
+This is the frontend application for the VIP Medwork system. It allows users to manage patients, assign providers, and track clinical statuses.
 
-First, run the development server:
+## Technologies Used
+
+ • Next.js
+ • TypeScript
+ • Tailwind CSS
+ • Zustand
+ • TanStack Query (React Query)
+ • Formik + Yup
+ • Axios
+
+---
+
+Requirements
+ • Node.js v18+
+ • npm or yarn
+ • Docker (if running inside container)
+
+---
+
+## Run Locally
+
+1. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+By default, it runs on <http://localhost:3000>
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Build with Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Build the image
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+docker build -t vip-medwork-frontend .
+```
 
-## Deploy on Vercel
+2. Run the container
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker run -d -p 3000:3000 vip-medwork-frontend
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You can now access the app at <http://localhost:3000>
+
+---
+
+### .dockerignore Example
+
+node_modules
+.next
+*.log
+dist
+docker-compose*
+.env*
+
+---
+
+### Folder Structure
+
+/src
+  /components        → Reusable UI components
+  /hooks             → Custom React hooks (e.g. Zustand stores, React Query wrappers)
+  /pages             → Application routes (Next.js)
+  /services          → API services (commands & queries)
+  /store             → Zustand stores
+  /lib               → Shared utilities and configuration (e.g. react-query client)
+
+---
+
+### Notes
+ • Ensure the backend services are up and reachable via environment variables.
+ • All patient and provider operations assume backend endpoints are working and return responses wrapped in GenericResponse<T>.
+ • Statuses should be preloaded into the backend with proper parent-child relationships (refer to backend seeding strategy).
+
+---
+
+### Author
+
+Built by Inyer 👨‍💻

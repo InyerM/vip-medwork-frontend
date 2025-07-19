@@ -1,0 +1,28 @@
+# Node modules
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-store
+
+# Configs and metadata
+.env
+.env.* 
+.DS_Store
+.vscode
+.idea
+*.swp
+
+# Builds
+dist
+.next
+out
+coverage
+
+# Temp files
+*.log
+*.tsbuildinfo
+*.tgz
+
+# Git
+.git
+.gitignore
